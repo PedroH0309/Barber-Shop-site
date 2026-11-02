@@ -1,0 +1,10 @@
+# Deploy root repository on Railway using Docker.
+# Requires a persistent Railway volume mounted at /app/data.
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "deploy/Dockerfile"
+
+[deploy]
+healthcheckPath = "/api/public/config"
+healthcheckTimeout = 120
+restartPolicyType = "ON_FAILURE"
