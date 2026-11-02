@@ -251,7 +251,8 @@
     catch(e){flash(e.message,true);}
   }
   async function loadSchedule(){const data=await api('schedule');const shifts=$('#shift-list'),blocks=$('#block-list');shifts.replaceChildren();blocks.replaceChildren();
-    $('#schedule-public-status').textContent=data.published?'✓ AGENDA PUBLICADA — turnos futuros já aparecem para clientes, respeitando folgas e reservas.':'⚠ AGENDA NÃO PUBLICADA — ative em Configurações → Publicar agenda e salve para os clientes verem horários.';
+    $('#schedule-public-status').textContent=data.published?(data.shifts.length?'✓ AGENDA PUBLICADA — turnos futuros já aparecem para clientes, respeitando folgas e reservas.':'⚠ AGENDA PUBLICADA, MAS SEM TURNOS — cadastre um expediente para os clientes encontrarem horários.'):'⚠ AGENDA NÃO PUBLICADA — clique em PUBLICAR AGENDA AGORA abaixo para liberar os horários aos clientes.';
+    $('#schedule-quick-publish').hidden=data.published || !data.shifts.length;
     $('#schedule-public-status').classList.toggle('active',data.published);
     if(!data.shifts.length)shifts.innerHTML='<p class="helper">Nenhum expediente cadastrado.</p>';
     for(const s of data.shifts){const row=chip(`${weekdayNames[s.weekday]} · ${s.start}–${s.end}`,async()=>{try{await api(`shifts/${s.id}`,{method:'DELETE'});await loadSchedule();}catch(e){flash(e.message,true);}});shifts.append(row);}
@@ -275,6 +276,15 @@
     }catch(e){flash(e.message,true);}
   }
   async function saveBlock(e){e.preventDefault();try{await api('blocks',{method:'POST',body:JSON.stringify({day:$('#block-day').value,start:$('#block-start').value,end:$('#block-end').value,reason:$('#block-reason').value})});flash('Período bloqueado.');await loadSchedule();}catch(err){flash(err.message,true);}}
+  async function publishScheduleNow(){
+    if(!confirm('Publicar agora a agenda para os clientes? Os turnos livres ficarão disponíveis para reserva.'))return;
+    try{
+      const current=await api('settings');
+      await api('settings',{method:'PUT',body:JSON.stringify({...current,published:true})});
+      await Promise.all([loadSchedule(),loadSettings()]);
+      flash('Agenda publicada! Acesse VER AGENDA PÚBLICA para conferir os horários.');
+    }catch(err){flash(err.message,true);}
+  }
   async function loadSettings(){const [data,feed,integrations]=await Promise.all([api('settings'),api('calendar-feed'),api('integrations')]);
     const wa=integrations.whatsapp;
     $('#whatsapp-integration-status').textContent=wa.automatic_reminders_active
@@ -316,6 +326,7 @@
   $('#replace-shift-day').addEventListener('click',()=>changeWeekdaySchedule(false));
   $('#close-shift-day').addEventListener('click',()=>changeWeekdaySchedule(true));
   $('#settings-form').addEventListener('submit',saveSettings);
+  $('#publish-schedule-now').addEventListener('click',publishScheduleNow);
   $('#copy-calendar').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#calendar-url').value);flash('Link copiado. Guarde-o em segurança.');}catch{flash('Selecione o link e copie manualmente.',true);}});
   $('#rotate-calendar').addEventListener('click',rotateFeed);
   $('#logout').addEventListener('click',async()=>{try{await api('logout',{method:'POST'});}finally{showLogin();}});
