@@ -72,6 +72,24 @@ python manage.py create-admin
 uvicorn backend.app:app --host 127.0.0.1 --port 5500
 ```
 
+### Por que os horários não apareciam para os clientes?
+
+O expediente semanal e a **publicação da agenda** são configurações diferentes. Por segurança, novas instalações começam com a agenda despublicada. Mesmo com turnos cadastrados, `/agendar` não mostra horários enquanto a opção **Publicar agenda** estiver desligada.
+
+Para liberar: **Admin → Meus horários → PUBLICAR AGENDA AGORA**, ou **Admin → Configurações → Publicar agenda → Salvar**. O botão da tela de horários só aparece quando existem turnos cadastrados. Depois, o cliente pode clicar em **Atualizar horários** e escolher um dia com expediente.
+
+**Importante:** o GitHub guarda apenas o código. A pasta local `data/`, que contém senha administrativa, SQLite, fotos enviadas e agendamentos de clientes, **não é enviada** ao repositório. O endereço `127.0.0.1` continua privado ao computador; publicar no GitHub não hospeda o backend da agenda.
+
+### Atualização de uma instalação Windows existente
+
+1. Pare o servidor usando `Ctrl + C` e faça backup de `data/`.
+2. Baixe o código atualizado do GitHub: **Code → Download ZIP**.
+3. Copie os novos arquivos para a instalação atual, mantendo **`data/`** e **`.venv/`** intactos.
+4. Rode `\.venv\Scripts\python.exe -m pip install -r requirements.txt`, caso dependências tenham mudado.
+5. Reinicie com **INICIAR_WINDOWS.bat** e use **Ctrl + F5** no navegador para atualizar o JavaScript do painel.
+
+O login do barbeiro e as reservas persistem porque permanecem na pasta `data/` original.
+
 ### Primeira configuração
 
 A agenda começa **DESPUBLICADA**, com preços e turnos apenas ilustrativos. No painel, revise os serviços, durações, preços, fotos, planos (vitrine, sem cobrança recorrente), expediente, pausas, folgas, endereço e telefone. **Só então marque "Publicar agenda"** em Configurações. Em uma tela anônima, faça um agendamento de teste e aprove manualmente no admin.
