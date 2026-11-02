@@ -285,7 +285,7 @@ async def protect(request:Request,call_next):
     response.headers['Referrer-Policy']='strict-origin-when-cross-origin'
     response.headers['X-Frame-Options']='DENY'
     response.headers['Permissions-Policy']='camera=(), microphone=(), geolocation=()'
-    if request.url.path.startswith('/api/'):
+    if request.url.path.startswith('/api/') or request.url.path in ('/admin', '/admin.html', '/admin.js', '/admin.css', '/admin-mobile.css', '/admin-pwa.js', '/admin-sw.js'):
         response.headers['Cache-Control']='no-store'
     return response
 

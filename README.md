@@ -167,3 +167,11 @@ A agenda respeita a duração do serviço (cortes mais longos podem não caber p
 Faça backup da pasta `data/` (principalmente `agenda.sqlite3` e `uploads/`), feche o servidor (`Ctrl+C` no terminal) e **substitua os arquivos do programa pelos deste ZIP, preservando as pastas `data/` e `.venv/`**. Não execute o instalador se a instalação atual já funciona. Para reiniciar: `INICIAR_WINDOWS.bat`. Os horários existentes não sofrem migração de numeração, pois o erro estava na consulta pública, não na convenção usada no painel.
 
 Teste de regressão: `python test_schedule_sync.py` (com banco temporário isolado, sem tocar nas reservas reais).
+
+## Precision Admin instalável (iOS / Android / Windows)
+
+O painel `/admin` agora é um PWA responsivo: tem manifesto, ícones, navegação móvel e instruções de instalação no iPhone (Safari → Compartilhar → Adicionar à Tela de Início), Android (Chrome → Instalar app) e desktop (Chrome/Edge → Instalar aplicativo).
+
+O sistema continua exigindo autenticação e conexão com a internet: **nenhuma reserva ou resposta privada da API é armazenada offline**. A interface e as operações administrativas compartilham a mesma API e banco de dados do agendamento público. Em produção é necessário HTTPS com domínio próprio; `127.0.0.1` funciona apenas no computador local.
+
+Para publicar site + API + banco com armazenamento persistente, consulte [deploy/README.md](deploy/README.md). O GitHub sozinho não hospeda o backend. Não envie credenciais ou o banco ao GitHub.

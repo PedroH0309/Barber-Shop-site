@@ -1,0 +1,80 @@
+/* Precision Admin PWA: compact native-like UX on phones, same server-side authorization. */
+.mobile-dock,.mobile-menu,.mobile-menu-veil{display:none}
+.pwa-network-status{position:fixed;z-index:200;top:0;left:0;right:0;text-align:center;background:#74442e;color:#fff4e9;padding:12px 16px;font-weight:700;font-size:12px}
+.install-app-button,.login-install-button{border:1px solid #776243;color:#edbf7d;background:#28251d;padding:10px 12px;font-size:10px;letter-spacing:.08em;font-weight:700;white-space:nowrap}
+.login-install-button{width:100%;margin-top:13px;padding:14px}
+.pwa-install-dialog{border:1px solid #746044;background:#171a17;color:#eeeae2;width:min(470px,calc(100% - 28px));max-height:min(90vh,750px);overflow:auto;padding:26px}
+.pwa-install-dialog::backdrop{background:#050705d9}
+.pwa-dialog-top{display:flex;align-items:flex-start;justify-content:space-between;gap:15px}
+.pwa-dialog-top h2{font:500 31px/1.2 var(--display);margin:7px 0 15px}
+.pwa-dialog-close{background:none;border:0;color:#c9b795;font-size:23px;padding:5px}
+.pwa-install-dialog p{font-size:12px;color:#b4b8ad}
+.pwa-device{display:grid;gap:7px;border:1px solid #42483d;background:#20251f;padding:14px;margin:10px 0}
+.pwa-device b{color:#d6b17b;font-size:13px}.pwa-device span{font-size:12px;line-height:1.6;color:#d3d8d0}
+.pwa-install-warning{font-size:11px!important;color:#c8a56e!important}.pwa-install-now{width:100%;margin-top:10px}
+@media(max-width:760px){
+  html{scroll-padding-bottom:110px}
+  .workspace{display:block;min-height:100dvh}
+  .sidebar{display:none}
+  .workspace-main{min-width:0}
+  .topbar{padding:19px 16px 16px;gap:8px;min-width:0;position:sticky;top:0;z-index:20;background:#121511f7;backdrop-filter:blur(18px)}
+  .topbar h1{font-size:25px}
+  .top-actions{gap:7px;flex-shrink:0}
+  .top-actions .avatar{display:none}
+  .status-dot{font-size:9px;letter-spacing:0}
+  .install-app-button{padding:9px 8px;font-size:9px;max-width:95px;white-space:normal;line-height:1.2}
+  .dashboard-content{padding:23px 14px calc(110px + env(safe-area-inset-bottom));max-width:100%}
+  .view-heading{margin-bottom:20px}
+  .view-heading h2{font-size:clamp(30px,8vw,40px)}
+  .view-heading .primary,.view-heading .small-btn{min-height:44px}
+  .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .stat{min-height:115px;padding:16px;min-width:0}
+  .stat>span{font-size:9px;line-height:1.4;letter-spacing:0.045em}
+  .stat strong{font-size:35px}.stat small{font-size:10px}
+  .section-bar{gap:10px;margin:30px 0 15px}
+  .section-bar h3{font-size:20px}
+  .section-bar .small-btn{padding:10px;font-size:9px}
+  .pending-card{gap:12px;padding:17px 14px}
+  .approval-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:8px}
+  .approval-actions .small-btn{width:100%;min-height:43px}
+  .approval-actions select{grid-column:1/-1;width:100%;min-height:44px}
+  .booking-item{padding:13px;gap:10px}
+  .booking-hour{font-size:24px}
+  .panel{padding:18px 15px}
+  .split{gap:14px}
+  .editable-grid{grid-template-columns:1fr;gap:12px}
+  .editable-card img{height:175px}
+  .editable-buttons button{min-height:44px}
+  .filters{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .filters label{width:100%;display:grid;gap:6px}
+  .filters input,.filters select{max-width:none;width:100%;min-width:0;min-height:44px}
+  .filters label:has(input[type=search]){grid-column:1/-1}
+  .filters button{min-height:44px}
+  .table-wrap{max-width:100%;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+  .table-wrap table{min-width:720px}
+  .client-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .client-stats .stat{min-height:100px}
+  .client-stats .stat strong{font-size:30px}
+  .login-screen{min-height:100dvh;padding:16px}
+  .login-box{padding:30px 21px}.login-box h1{font-size:41px}
+  .login-box input{min-height:47px;font-size:16px}
+  .login-box .primary{min-height:48px}
+  input[type=time],input[type=date],select{min-height:44px;max-width:100%;font-size:16px}
+  .modal-form{padding:22px 17px}
+  .modal-form input,.modal-form textarea,.modal-form select{font-size:16px;min-height:44px}
+  .mobile-dock{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));position:fixed;z-index:40;bottom:0;left:0;right:0;background:#1b201beb;border-top:1px solid #574c37;padding:8px 6px calc(8px + env(safe-area-inset-bottom));backdrop-filter:blur(18px);box-shadow:0 -8px 30px #0009}
+  .mobile-dock button{white-space:pre-line;border:0;background:none;color:#a5aba1;padding:8px 2px 6px;font-size:12px;line-height:1.7;min-height:53px;letter-spacing:.01em;font-weight:700}
+  .mobile-dock button.active,.mobile-dock button[aria-expanded=true]{color:#efbd79}
+  .mobile-dock button:focus-visible,.mobile-menu button:focus-visible{outline:2px solid #d0a467;outline-offset:-2px}
+  .mobile-menu-veil:not([hidden]){display:block;position:fixed;inset:0;background:#000b;z-index:45}
+  .mobile-menu:not([hidden]){display:block;position:fixed;z-index:46;left:0;right:0;bottom:0;background:#1a1f1a;border:1px solid #554b3a;border-radius:18px 18px 0 0;padding:17px 15px calc(22px + env(safe-area-inset-bottom));max-height:85dvh;overflow:auto;box-shadow:0 -15px 45px #000c}
+  .mobile-menu-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding:0 8px}
+  .mobile-menu-title strong{font-size:12px;letter-spacing:.1em;color:#d5aa70}
+  .mobile-menu-close{color:#e1d5c5;border:0;background:transparent;font-size:22px;min-width:44px;min-height:44px}
+  .mobile-menu-item{display:block;width:100%;text-align:left;padding:14px;background:#222820;border:1px solid #373d32;color:#eeeae2;min-height:48px;margin-bottom:6px;font-size:13px}
+  .mobile-menu-open{overflow:hidden}
+  body:has(#workspace[hidden]) .mobile-dock{display:none}
+}
+@media(min-width:761px) and (max-width:1100px){.install-app-button{font-size:9px;padding:9px}}
+@media(max-width:360px){.topbar h1{font-size:22px}.topbar .tiny{font-size:8px}.install-app-button{max-width:75px}.stat strong{font-size:30px}}
+

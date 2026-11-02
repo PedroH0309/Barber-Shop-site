@@ -36,8 +36,10 @@ jobs:
           python test_system.py
           python test_schedule_sync.py
           python test_admin_v2.py
+          python test_pwa.py
       - name: Browser script syntax
         run: |
           node --check site/admin.js
+          node --check site/admin-pwa.js
           node --check site/booking.js
           node --check site/script.js
