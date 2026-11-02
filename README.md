@@ -1,6 +1,6 @@
 # PRECISION AGENDA — Edição com aprovação manual
 
-> **Hospedagem recomendada: Render.** Para publicar o site e o Precision Admin no mesmo endereço HTTPS, use o Blueprint [`render.yaml`](render.yaml) e o [guia de publicação no Render](deploy/RENDER.md). A configuração requer um serviço pago com disco persistente para preservar o banco SQLite e as fotos. O GitHub contém somente código; publicar o repositório não cria o servidor nem transfere reservas do Windows.
+> **Opção gratuita para testes:** [Hospedar no PythonAnywhere (Beginner, $0/mês)](deploy/PYTHONANYWHERE_FREE.md), preservando o SQLite nos arquivos da conta. Limitações: web app expira após um mês, limite de recursos e suporte FastAPI/ASGI experimental. **Opção paga para produção:** [Render com disco persistente](deploy/RENDER.md), descrita em [`render.yaml`](render.yaml). Nenhum arquivo do repositório contrata uma hospedagem automaticamente. O GitHub contém apenas o código, não os agendamentos do PC.
 
 
 Sistema completo de site + agendamento para **um único barbeiro**, com agenda pública de horários livres e painel administrativo protegido por senha. A reserva **não fica automaticamente confirmada**: é uma **solicitação pendente de aprovação**.
