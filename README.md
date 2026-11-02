@@ -1,5 +1,8 @@
 # PRECISION AGENDA — Edição com aprovação manual
 
+> **Hospedagem recomendada: Render.** Para publicar o site e o Precision Admin no mesmo endereço HTTPS, use o Blueprint [`render.yaml`](render.yaml) e o [guia de publicação no Render](deploy/RENDER.md). A configuração requer um serviço pago com disco persistente para preservar o banco SQLite e as fotos. O GitHub contém somente código; publicar o repositório não cria o servidor nem transfere reservas do Windows.
+
+
 Sistema completo de site + agendamento para **um único barbeiro**, com agenda pública de horários livres e painel administrativo protegido por senha. A reserva **não fica automaticamente confirmada**: é uma **solicitação pendente de aprovação**.
 
 ## Fluxo de reserva
