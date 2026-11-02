@@ -1,0 +1,25 @@
+# Precision Agenda: one web service, one persistent SQLite database.
+# Deploy using Render Dashboard -> New -> Blueprint.
+# The disk requires paid compute. Do NOT change plan to free.
+services:
+  - type: web
+    name: precision-agenda
+    runtime: python
+    repo: https://github.com/PedroH0309/Barber-Shop-site
+    branch: main
+    plan: 0.5c-512mb
+    numInstances: 1
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn backend.app:app --host 0.0.0.0 --port $PORT --workers 1 --proxy-headers --forwarded-allow-ips '*'
+    healthCheckPath: /api/public/config
+    envVars:
+      - key: AGENDA_DATA_DIR
+        value: /opt/render/project/src/data
+      - key: COOKIE_SECURE
+        value: '1'
+      - key: REMINDERS_ENABLED
+        value: '0'
+    disk:
+      name: precision-agenda-data
+      mountPath: /opt/render/project/src/data
+      sizeGB: 1
